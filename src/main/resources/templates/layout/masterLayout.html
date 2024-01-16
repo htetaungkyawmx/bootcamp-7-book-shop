@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html th:fragment="layout(main)" lang="en" xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css"
+    th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../static/bootstrap/css/app.css"
+    th:href="@{/bootstrap/css/app.css}">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark text-white">
+    <a href="#" class="navbar-brand">
+        <h3 class="mb-0">BookShop</h3>
+    </a>
+    <button type="button" class="navbar-toggler"
+            data-bs-toggler="collapse"
+            data-bs-target="#myNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="myNav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Explore</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Book</a>
+            </li>
+        </ul>
+        <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{/auth/login}" class="me-2">Login</a>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            <a th:href="@{/book/own-library}"  class="nav-link me-2">Own Library</a>
+            <a href="javascript: document.logoutForm.submit()" class="nav-link">Logout</a>
+            <form name="logoutForm" th:action="@{/logout}"
+                  method="post" th:hidden="true">
+                <input type="submit" hidden value="Logout">
+            </form>
+        </div>
+    </div>
+</nav>
+<section id="showcase" class="d-flex justify-content-center align-items-center text-white">
+    <div id="overlay"></div>
+    <div id="header" class="container text-center">
+        <h3 class="display-5 m-0">MODERN BOOKSHOP</h3>
+        <h1 class="display-1">BOOKSHOP</h1>
+        <p class="lead d-none d-md-block">Lorem ipsum dolor sit amet, consectetur
+            adipisicing elit. In, labore.</p>
+        <a id="book" th:href="@{/book/list-books}"
+           class="btn btn-outline-primary px-5 py-2 text-white">Book Now</a>
+    </div>
+</section>
+
+
+
+<div th:replace="${main}"></div>
+
+<section class="bg-dark text-white container-fluid">
+    <div class="container text-center p-5">
+        <h3>JOIN OUR NEWS BUYERS FOR DEALS AND UPDATE AND OFFERS</h3>
+        <div class="row justify-content-center">
+            <div class="col-10 col-md-6 col-sm-8 col-lg-4">
+                <form action="#" >
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control">
+                        <button class="btn btn-success input-group-text">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="footer" class="bg-secondary p-4 text-white">
+    <ul class="nav text-center justify-content-center flex-column
+         flex-sm-row">
+        <li class="nav-item">
+            <a href="#" class="nav-link">FAQ</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">EXPERIENCE</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">CONTACT</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">BOOKNOW</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">EXPLORE</a>
+        </li>
+    </ul>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>
